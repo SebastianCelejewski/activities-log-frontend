@@ -22,6 +22,7 @@ export class ActivitiesListComponent implements OnInit {
     }
 
     processActivities(activities: Activity[]): void {
+        activities = activities.sort((a1,a2) => a1.type > a2.type ? 1 : -1);
         var balance = 0;
         for (var i = 0; i < activities.length; i++) {
             if (activities[i].type === "active") {
@@ -34,4 +35,8 @@ export class ActivitiesListComponent implements OnInit {
         this.activities = activities;
     }
 
+    deleteActivity(activityId: string) {
+        this.activities = this.activities.filter(a => a.id !== activityId);
+        this.activityService.deleteActivity(activityId);
+    }
 }

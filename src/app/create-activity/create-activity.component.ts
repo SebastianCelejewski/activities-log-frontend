@@ -16,7 +16,24 @@ export class CreateActivityComponent implements OnInit {
   }
 
   addActivity(activityDate: string, activityType: string, activityDescription: string, activityDuration: string): void {
-  
+  	activityDate = activityDate.trim();
+  	activityType = activityType.trim();
+  	activityDescription = activityDescription.trim();
+  	activityDuration = activityDuration.trim();
+
+  	if (!activityDate || !activityType || !activityDescription || !activityDuration) {
+  		return;
+  	}
+
+  	var activity = new Activity();
+  	activity.type = activityType;
+  	activity.date = activityDate;
+  	activity.user = 'Filip';
+  	activity.description = activityDescription;
+  	activity.duration = +activityDuration;
+
+  	this.activityService.createActivity(activity);
+
   }
 
 }
