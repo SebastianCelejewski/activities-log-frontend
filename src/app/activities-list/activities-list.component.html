@@ -1,0 +1,16 @@
+<h2>Activities</h2>
+
+<table class="activities">
+	<tr>
+		<th>Date</th>
+		<th>Activity</th>
+		<th>Duration</th>
+		<th></th>
+	</tr>
+	<tr *ngFor="let activity of activities">
+		<td>{{activity.date}}</td>
+		<td>{{activity.type}}</td>
+		<td>{{activity.duration}} h</td>
+		<td><a href="">Edit</a> <a href="">Delete</a></td>
+	</tr>
+</table>
