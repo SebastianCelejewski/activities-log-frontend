@@ -18,7 +18,20 @@ export class ActivitiesListComponent implements OnInit {
     }
 
     getActivities(): void {
-        this.activities = this.activityService.getActivities();
+        this.activityService.getActivities().subscribe(activities => this.processActivities(activities) );
+    }
+
+    processActivities(activities: Activity[]): void {
+        var balance = 0;
+        for (var i = 0; i < activities.length; i++) {
+            if (activities[i].type === "active") {
+                balance = balance + activities[i].duration;
+            } else {
+                balance = balance - activities[i].duration;
+            }
+            activities[i].balance = balance;
+        }
+        this.activities = activities;
     }
 
 }

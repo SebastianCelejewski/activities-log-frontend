@@ -4,4 +4,5 @@ export class Activity {
 	type: string;
 	description: string;
 	duration: number;
+	balance: number;
 }
