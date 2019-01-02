@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ActivitiesListComponent } from './activities-list/activities-list.component';
+import { CreateActivityComponent } from './create-activity/create-activity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActivitiesListComponent
+    ActivitiesListComponent,
+    CreateActivityComponent
   ],
   imports: [
     BrowserModule,
