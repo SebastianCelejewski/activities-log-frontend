@@ -3,14 +3,18 @@
 <table class="activities">
 	<tr>
 		<th>Date</th>
-		<th>Activity</th>
+		<th>Type</th>
+		<th>Description</th>
 		<th>Duration</th>
+		<th>Balance</th>
 		<th></th>
 	</tr>
-	<tr *ngFor="let activity of activities">
+	<tr *ngFor="let activity of activities" class="{{activity.class}}">
 		<td>{{activity.date}}</td>
 		<td>{{activity.type}}</td>
+		<td>{{activity.description}}</td>
 		<td>{{activity.duration}} h</td>
-		<td><a href="">Edit</a> <a href="">Delete</a></td>
+		<td>{{activity.balance}} h</td>
+		<td><a href="">Edit</a> | <a href="">Delete</a></td>
 	</tr>
 </table>
