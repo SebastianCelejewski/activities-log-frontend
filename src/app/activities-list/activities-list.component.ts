@@ -35,8 +35,8 @@ export class ActivitiesListComponent implements OnInit {
         this.activities = activities;
     }
 
-    deleteActivity(activityId: string) {
-        this.activities = this.activities.filter(a => a.id !== activityId);
-        this.activityService.deleteActivity(activityId);
+    deleteActivity(activity: Activity) {
+        this.activities = this.activities.filter(a => a !== activity);
+        this.activityService.deleteActivity(activity);
     }
 }
