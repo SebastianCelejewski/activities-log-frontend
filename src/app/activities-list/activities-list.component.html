@@ -1,20 +1,29 @@
-<h2>Activities</h2>
 
-<table class="activities">
-	<tr>
-		<th>Date</th>
-		<th>Type</th>
-		<th>Description</th>
-		<th>Duration</th>
-		<th>Balance</th>
-		<th></th>
-	</tr>
-	<tr *ngFor="let activity of activities" class="{{activity.type}}">
-		<td>{{activity.date}}</td>
-		<td>{{activity.type}}</td>
-		<td>{{activity.description}}</td>
-		<td>{{activity.duration}} h</td>
-		<td>{{activity.balance}} h</td>
-		<td><button (click)="deleteActivity(activity)">Delete</button></td>
-	</tr>
-</table>
+<div class="component">
+	<h2>Activities</h2>
+	<table>
+		<tr>
+			<th>Date</th>
+			<th>Type</th>
+			<th>Description</th>
+			<th>Duration</th>
+			<th></th>
+		</tr>
+		<tr *ngFor="let activity of activities" class="{{activity.type}}">
+			<td>{{activity.date}}</td>
+			<td>{{activity.type}}</td>
+			<td>{{activity.description}}</td>
+			<td>{{activity.duration}} h</td>
+			<td><button (click)="deleteActivity(activity)">Delete</button></td>
+		</tr>
+	</table>
+</div>
+
+<div class="component">
+	<h2>Balance</h2>
+	<p>Total active time: {{totalActiveTime}} h</p>
+	<p>Total passive time: {{totalPassiveTime}} h</p>
+	<p>Time balance: {{timeBalance}} h</p>
+</div>
+
+<div style="clear:both;"></div>

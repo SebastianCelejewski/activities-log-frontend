@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+.component {
+	border: 1px solid #f0f0f0;
+	margin: 5px;
+	padding: 15px;
+	float: left;
+}

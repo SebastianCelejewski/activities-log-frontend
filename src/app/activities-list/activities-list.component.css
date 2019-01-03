@@ -14,3 +14,10 @@ td {
 .passive {
 	background-color: #ff8080;
 }
+
+.activitiesListComponent {
+	float: left;
+	margin-left: 20px;
+	border: 1px solid #f0f0f0;
+	padding: 15px;
+}
