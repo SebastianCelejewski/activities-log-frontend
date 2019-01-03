@@ -6,12 +6,14 @@ import { Observable, of, Subject } from 'rxjs';
 
 import { Activity } from '../domain/activity';
 
+import {environment} from '../environments/environment';
+
 @Injectable({
     providedIn: 'root'
 })
 export class ActivityService {
 
-    private apiUrl = "https://c4mpyiczgd.execute-api.eu-central-1.amazonaws.com/dev/activities";
+    private apiUrl = environment.apiUrl;
 
     private activitiesAddedSubject = new Subject<Activity>();
 
