@@ -10,17 +10,17 @@ import { ActivitiesListComponent } from './activities-list/activities-list.compo
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ActivitiesListComponent,
-    CreateActivityComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ActivitiesListComponent,
+        CreateActivityComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
