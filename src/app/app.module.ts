@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
+
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { DatePipe } from '@angular/common';
 
 import { ActivitiesListComponent } from './activities-list/activities-list.component';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
@@ -18,9 +22,11 @@ import { CreateActivityComponent } from './create-activity/create-activity.compo
     imports: [
         BrowserModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
+        DpDatePickerModule
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

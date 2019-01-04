@@ -1,14 +1,30 @@
 <div class="component">
 <h2>Add activity</h2>
 
-<p><label>Date:</label><input #activityDate/></p>
-<p><label>Type:</label>
-<select #activityType>
-	<option label="Active">active</option>
-	<option label="Passive">passive</option>
-</select>
+<p>
+	<label>Date:</label>
+	<dp-date-picker
+		#activityDate
+		[(ngModel)]="selectedDate"
+		[config]="datePickerConfig"
+		required>
+	</dp-date-picker>
 </p>
-<p><label>Description:</label><input #activityDescription/></p>
-<p><label>Duration:</label><input #activityDuration/></p>
+<p>
+	<label>Type:</label>
+	<select #activityType>
+		<option label="Aktywny ruch">active</option>
+		<option label="Korzystanie z elektroniki">passive</option>
+	</select>
+</p>
+<p>
+	<label>Description:</label>
+	<input #activityDescription/>
+	</p>
+<p>
+	<label>Duration:</label>
+	<input #activityDuration/>
+</p>
+
 <button (click)="addActivity(activityDate.value, activityType.value, activityDescription.value, activityDuration.value); activityDate.value=''; activityType.value=''; activityDescription.value=''; activityDuration.value='';	">Add</button>
 </div>
