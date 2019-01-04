@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/SebastianCelejewski/activities-log-frontend.svg?branch=master)](https://travis-ci.com/SebastianCelejewski/activities-log-frontend)
+
 # Activities Log Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
