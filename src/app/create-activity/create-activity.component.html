@@ -2,7 +2,12 @@
 <h2>Add activity</h2>
 
 <p><label>Date:</label><input #activityDate/></p>
-<p><label>Type:</label><input #activityType/></p>
+<p><label>Type:</label>
+<select #activityType>
+	<option label="Active">active</option>
+	<option label="Passive">passive</option>
+</select>
+</p>
 <p><label>Description:</label><input #activityDescription/></p>
 <p><label>Duration:</label><input #activityDuration/></p>
 <button (click)="addActivity(activityDate.value, activityType.value, activityDescription.value, activityDuration.value); activityDate.value=''; activityType.value=''; activityDescription.value=''; activityDuration.value='';	">Add</button>
