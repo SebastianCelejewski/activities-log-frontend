@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { Activity } from '../../domain/activity';
 import { ActivityService } from '../../services/activity.service';
 

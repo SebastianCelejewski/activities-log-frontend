@@ -11,7 +11,7 @@ export class AppComponent {
     title = 'Activities Log';
     envName = environment.name;
     users: string[] = [ "Filip", "Maja"];
-    private userChangedSubject: Subject<string> = new Subject<string>();
+    userChangedSubject: Subject<string> = new Subject<string>();
     currentUser: string = this.users[0];
 
     ngAfterViewInit() {
@@ -19,7 +19,9 @@ export class AppComponent {
     }
 
     onUserChanged(id: string): void {
-        this.currentUser = event.target.value;
+    	const eventTarget = event.target
+    	const select = <HTMLSelectElement>eventTarget;
+        this.currentUser = select.value;
         this.fireUserChanged();
     }
 
