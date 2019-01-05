@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from '../../domain/activity';
 import { ActivityService } from '../../services/activity.service';
 
@@ -13,6 +13,8 @@ export class ActivitiesListComponent implements OnInit {
     totalActiveTime: number;
     totalPassiveTime: number;
     timeBalance: number;
+    user: string;
+    @Input() userChangeEvents: Observable<string>;
 
     constructor(private activityService: ActivityService) {
         activityService.activitiesAdded$.subscribe(
@@ -24,11 +26,15 @@ export class ActivitiesListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.userChangeEvents.subscribe(user => {
+            this.user = user;
+            this.getActivities();
+            });
         this.getActivities();
     }
 
     getActivities(): void {
-        this.activityService.getActivities().subscribe(activities => {
+        this.activityService.getActivities(this.user).subscribe(activities => {
                 this.activities = activities;
                 this.recalculateBalance();
             } 

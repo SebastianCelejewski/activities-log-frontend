@@ -21,8 +21,9 @@ export class ActivityService {
 
     constructor(private http: HttpClient) { }
 
-    getActivities(): Observable<Activity[]> {
-        return this.http.get<Activity[]>(this.apiUrl);
+    getActivities(user: string): Observable<Activity[]> {
+        const url = `${this.apiUrl}?user=${user}`
+        return this.http.get<Activity[]>(url);
     }
 
     createActivity(activity: Activity): void {
