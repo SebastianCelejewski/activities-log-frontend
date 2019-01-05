@@ -5,11 +5,11 @@ import { Activity } from '../../domain/activity';
 import { ActivityService } from '../../services/activity.service';
 
 @Component({
-    selector: 'app-activities-list',
-    templateUrl: './activities-list.component.html',
-    styleUrls: ['./activities-list.component.css']
+    selector: 'app-activity-list',
+    templateUrl: './activity-list.component.html',
+    styleUrls: ['./activity-list.component.css']
 })
-export class ActivitiesListComponent implements OnInit {
+export class ActivityListComponent implements OnInit {
 
     activities: Activity[];
     totalActiveTime: number;

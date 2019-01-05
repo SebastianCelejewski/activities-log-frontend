@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "activities-log-frontend": {
+    "activity-log-frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/activities-log-frontend",
+            "outputPath": "dist/activity-log-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -81,21 +81,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "activities-log-frontend:build"
+            "browserTarget": "activity-log-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "activities-log-frontend:build:production"
+              "browserTarget": "activity-log-frontend:build:production"
             },
             "test": {
-              "browserTarget": "activities-log-frontend:build:test"
+              "browserTarget": "activity-log-frontend:build:test"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "activities-log-frontend:build"
+            "browserTarget": "activity-log-frontend:build"
           }
         },
         "test": {
@@ -129,7 +129,7 @@
         }
       }
     },
-    "activities-log-frontend-e2e": {
+    "activity-log-frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -138,11 +138,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "activities-log-frontend:serve"
+            "devServerTarget": "activity-log-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "activities-log-frontend:serve:production"
+              "devServerTarget": "activity-log-frontend:serve:production"
             }
           }
         },
@@ -158,5 +158,5 @@
       }
     }
   },
-  "defaultProject": "activities-log-frontend"
+  "defaultProject": "activity-log-frontend"
 }
