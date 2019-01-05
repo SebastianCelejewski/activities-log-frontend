@@ -22,6 +22,7 @@ export class ActivitiesListComponent implements OnInit {
         activityService.activitiesAdded$.subscribe(
             addedActivity => {
                 this.activities.push(addedActivity);
+                this.sortActivities();
                 this.recalculateBalance();
             }
         )
@@ -38,9 +39,25 @@ export class ActivitiesListComponent implements OnInit {
     getActivities(): void {
         this.activityService.getActivities(this.user).subscribe(activities => {
                 this.activities = activities;
+                this.sortActivities(); 
                 this.recalculateBalance();
             } 
         );
+    }
+
+    sortActivities(): void {
+        this.activities = this.activities.sort((a1, a2) => this.sort(a1, a2));
+    }
+
+    sort(a1: Activity, a2: Activity): number {
+        const d1 = 0 + a1.date;
+        const d2 = 0 + a2.date;
+        if (d1!=d2) {
+            return d1 > d2 ? 1 : -1;
+        }
+        const t1 = a1.type;
+        const t2 = a2.type;
+        return t1 > t2 ? 1 : -1;
     }
 
 /*        activities = activities.sort((a1,a2) => a1.type > a2.type ? 1 : -1); */
@@ -48,6 +65,7 @@ export class ActivitiesListComponent implements OnInit {
     deleteActivity(activity: Activity) {
         this.activities = this.activities.filter(a => a !== activity);
         this.activityService.deleteActivity(activity);
+        this.sortActivities();
         this.recalculateBalance();
     }
 
