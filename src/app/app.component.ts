@@ -18,8 +18,8 @@ export class AppComponent {
     	this.fireUserChanged();
     }
 
-    onUserChanged(id: string): void {
-    	const eventTarget = event.target
+    onUserChanged(event): void {
+    	const eventTarget = event.target;
     	const select = <HTMLSelectElement>eventTarget;
         this.currentUser = select.value;
         this.fireUserChanged();
