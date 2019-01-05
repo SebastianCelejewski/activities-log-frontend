@@ -1,21 +1,23 @@
-<div class="component" style="max-height: 200px; overflow-y: scroll;">
+<div class="component">
 	<h2>Activities</h2>
-	<table>
-		<tr>
-			<th>Date</th>
-			<th>Type</th>
-			<th>Description</th>
-			<th>Duration</th>
-			<th></th>
-		</tr>
-		<tr *ngFor="let activity of activities" class="{{activity.type}}">
-			<td>{{activity.date}}</td>
-			<td>{{activity.type}}</td>
-			<td>{{activity.description}}</td>
-			<td>{{activity.duration}} h</td>
-			<td><button (click)="deleteActivity(activity)">Delete</button></td>
-		</tr>
-	</table>
+	<div style="max-height: 250px; overflow-y: scroll;">
+		<table>
+			<tr>
+				<th>Date</th>
+				<th>Type</th>
+				<th>Description</th>
+				<th>Duration</th>
+				<th></th>
+			</tr>
+			<tr *ngFor="let activity of activities" class="{{activity.type}}">
+				<td>{{activity.date}}</td>
+				<td>{{activity.type}}</td>
+				<td>{{activity.description}}</td>
+				<td>{{activity.duration}} h</td>
+				<td><button (click)="deleteActivity(activity)">Delete</button></td>
+			</tr>
+		</table>
+	</div>
 </div>
 
 <div class="component">
