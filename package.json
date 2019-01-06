@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "amazon-cognito-identity-js": "^3.0.6",
     "core-js": "^2.5.4",
     "guid-typescript": "^1.0.9",
     "ng2-date-picker": "^2.11.0",

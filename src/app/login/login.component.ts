@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
  	userPassword: string = "";
 
     constructor(public authService: AuthService, public router: Router) {
-    	console.log("Creating new instance of LoginComponent");
     	this.setMessage();
     }
 
