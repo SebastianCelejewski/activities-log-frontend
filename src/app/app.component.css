@@ -2,3 +2,14 @@
 	text-align: right;
 	font-size: 10px;
 }
+
+a {
+	border: 1px solid #a0a0ff;
+	background: #f0f0ff;
+	padding: 2px;
+	margin: 1px;
+}
+
+.active {
+	font-weight: bold;
+}

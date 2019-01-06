@@ -14,6 +14,7 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
         ActivityListComponent,
         CreateActivityComponent,
         MainPageComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
