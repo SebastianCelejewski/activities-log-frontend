@@ -4,14 +4,4 @@
   <h1>{{title}}</h1>
 </div>
 
-<div class="userSelector">
-<label>Current user: </label>
-	<select #currentUser (change)="onUserChanged($event);">
-		<option *ngFor="let user of users" [value]="user">{{user}}</option>
-	</select>
-</div>
-
-<app-activity-list [userChangeEvents]="userChangedSubject"></app-activity-list>
-<app-create-activity [userChangeEvents]="userChangedSubject"></app-create-activity>
-
 <router-outlet></router-outlet>

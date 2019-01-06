@@ -12,12 +12,16 @@ import { DatePipe } from '@angular/common';
 
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ActivityListComponent,
-        CreateActivityComponent
+        CreateActivityComponent,
+        MainPageComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

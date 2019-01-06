@@ -1,7 +1,7 @@
-.component {
+.userSelector {
+	text-align: center;
 	border: 1px solid #f0f0f0;
 	background: #fafafa;
 	margin: 5px;
-	padding: 15px;
-	float: left;
+	padding: 5px;
 }
