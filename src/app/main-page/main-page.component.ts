@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from "rxjs";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-main-page',
@@ -8,23 +9,6 @@ import { Subject } from "rxjs";
 })
 export class MainPageComponent {
 
-    users: string[] = [ "Filip", "Maja"];
-    userChangedSubject: Subject<string> = new Subject<string>();
-    currentUser: string = this.users[0];
-
-    ngAfterViewInit() {
-    	this.fireUserChanged();
-    }
-
-    onUserChanged(event): void {
-    	const eventTarget = event.target;
-    	const select = <HTMLSelectElement>eventTarget;
-        this.currentUser = select.value;
-        this.fireUserChanged();
-    }
-
-    fireUserChanged(): void {
-    	this.userChangedSubject.next(this.currentUser);
-    }
+    constructor(private authService: AuthService) {}
 
 }

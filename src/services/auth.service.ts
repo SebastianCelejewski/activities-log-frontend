@@ -9,26 +9,47 @@ import { tap, delay } from 'rxjs/operators';
 export class AuthService {
 
     private loggedIn = false;
+    private userName: string = "";
     private instanceId: number;
+    private loginError: string = "";
 
     redirectUrl: string;
-
-    constructor() {
-        console.log("Creating new instance of AuthService");
-    }
 
     public isLoggedIn(): boolean {
         return this.loggedIn;
     }
 
-    login(): Observable<boolean> {
-        return of(true).pipe(
-            delay(1000),
-            tap(val => this.loggedIn = true)
-        );
+    public getUserName(): string {
+        return this.userName;
+    }
+
+    public getLoginError(): string {
+        return this.loginError;
+    }
+
+    login(userName: string, userPassword: string): Observable<boolean> {
+        if (
+            (userName === 'Filip' && userPassword === 'Filip')
+            || (userName === 'Maja' && userPassword === 'Maja')) {
+            return of(true).pipe(
+                delay(1000),
+                tap(val => {
+                    this.loggedIn = true;
+                    this.userName = userName;
+                })
+            );
+        } else {
+            return of(false).pipe(
+                delay(1000),
+                tap(val => {
+                    this.loginError = "Invalid user name or password";
+                })
+            );
+        }
     }
 
     logout(): void {
         this.loggedIn = false;
+        this.userName = undefined;
     }
 }

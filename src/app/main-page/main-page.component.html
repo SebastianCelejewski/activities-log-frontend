@@ -1,9 +1,6 @@
 <div class="userSelector">
-<label>Current user: </label>
-	<select #currentUser (change)="onUserChanged($event);">
-		<option *ngFor="let user of users" [value]="user">{{user}}</option>
-	</select>
+<p>Current user: <b>{{authService.getUserName()}}</b></p>
 </div>
 
-<app-activity-list [userChangeEvents]="userChangedSubject"></app-activity-list>
-<app-create-activity [userChangeEvents]="userChangedSubject"></app-create-activity>
+<app-activity-list></app-activity-list>
+<app-create-activity></app-create-activity>

@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 import { Activity } from '../../domain/activity';
 import { ActivityService } from '../../services/activity.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
     selector: 'app-activity-list',
@@ -15,10 +17,8 @@ export class ActivityListComponent implements OnInit {
     totalActiveTime: number;
     totalPassiveTime: number;
     timeBalance: number;
-    user: string;
-    @Input() userChangeEvents: Observable<string>;
 
-    constructor(private activityService: ActivityService) {
+    constructor(private activityService: ActivityService, private authService: AuthService) {
         activityService.activitiesAdded$.subscribe(
             addedActivity => {
                 this.activities.push(addedActivity);
@@ -29,15 +29,11 @@ export class ActivityListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userChangeEvents.subscribe(user => {
-            this.user = user;
-            this.getActivities();
-            });
         this.getActivities();
     }
 
     getActivities(): void {
-        this.activityService.getActivities(this.user).subscribe(activities => {
+        this.activityService.getActivities(this.authService.getUserName()).subscribe(activities => {
                 this.activities = activities;
                 this.sortActivities(); 
                 this.recalculateBalance();

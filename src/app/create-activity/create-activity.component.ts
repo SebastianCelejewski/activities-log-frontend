@@ -4,31 +4,25 @@ import { Observable } from 'rxjs';
 
 import { Activity } from '../../domain/activity';
 import { ActivityService } from '../../services/activity.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-create-activity',
     templateUrl: './create-activity.component.html',
     styleUrls: ['./create-activity.component.css']
 })
-export class CreateActivityComponent implements OnInit {
+export class CreateActivityComponent {
 
     public selectedDate:string = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     datePickerConfig = { format: "YYYY-MM-DD" }
 
-    user: string;
-    @Input() userChangeEvents: Observable<string>;
-
-    constructor(private activityService: ActivityService, private datePipe: DatePipe) { }
-
-    ngOnInit() {
-      this.userChangeEvents.subscribe(user => {
-            this.user = user;
-      });
-    }
+    constructor(
+      private activityService: ActivityService,
+      private authService: AuthService,
+      private datePipe: DatePipe) { }
 
     addActivity(activityDate: string, activityType: string, activityDescription: string, activityDuration: string): void {
         activityDate = this.selectedDate;
-  	    // activityDate = activityDate.trim();
   	    activityType = activityType.trim();
   	    activityDescription = activityDescription.trim();
   	    activityDuration = activityDuration.trim();
@@ -40,7 +34,7 @@ export class CreateActivityComponent implements OnInit {
   	    var activity = new Activity();
   	    activity.type = activityType;
   	    activity.date = activityDate;
-  	    activity.user = this.user;
+  	    activity.user = this.authService.getUserName();
   	    activity.description = activityDescription;
   	    activity.duration = +activityDuration;
 

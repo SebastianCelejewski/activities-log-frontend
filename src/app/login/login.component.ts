@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
  
@@ -7,22 +7,38 @@ import { AuthService } from '../../services/auth.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-    message: string;
- 
+export class LoginComponent implements OnInit {
+    message: string = "";
+ 	userName: string = "";
+ 	userPassword: string = "";
+
     constructor(public authService: AuthService, public router: Router) {
-        this.setMessage();
+    	console.log("Creating new instance of LoginComponent");
+    	this.setMessage();
     }
- 
+
+    ngOnInit() {
+    	this.setMessage();
+    }
+
+    ngAfterViewInit() {
+    	this.setMessage();
+    }
+
     setMessage() {
-        this.message = 'Logged ' + (this.authService.isLoggedIn() ? 'in' : 'out');
+    	if (this.authService.isLoggedIn()) {
+    		this.message = 'Logged in as ' + this.authService.getUserName();
+    	} else {
+    		this.message = 'Logged out';
+    	}
     }
  
-    login() {
-        this.message = 'Trying to log in ...';
+    login(userName: string, userPassword: string) {
+        this.message = 'Trying to log in as ' + userName;
+        this.userName = userName;
+        this.userPassword = userPassword;
  
-        this.authService.login().subscribe(() => {
-            this.setMessage();
+        this.authService.login(userName, userPassword).subscribe(() => {
             if (this.authService.isLoggedIn()) {
                 // Get the redirect URL from our auth service
                 // If no redirect has been set, use the default
@@ -30,12 +46,15 @@ export class LoginComponent {
  
                 // Redirect the user
                 this.router.navigate([redirect]);
+            } else {
+            	this.message = "Login error: " + this.authService.getLoginError();
             }
         });
     }
  
     logout() {
+    	this.message = "Logging out";
         this.authService.logout();
-        this.setMessage();
+    	this.message = "Logged out";
     }
 }
