@@ -3,6 +3,13 @@
 	font-size: 10px;
 }
 
+.userSelector {
+	text-align: center;
+	border: 1px solid #f0f0f0;
+	background: #fafafa;
+	margin: 5px;
+	padding: 5px;
+}
 
 nav {
 	margin: 3px;

@@ -1,0 +1,41 @@
+.userSelector {
+	text-align: center;
+	border: 1px solid #f0f0f0;
+	background: #fafafa;
+	margin: 5px;
+	padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td, th {
+	text-align: center;
+	padding: 5px;
+}
+
+.statusIndicator {
+	width: 25px;
+	height: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	background-size: 25px 25px;
+	background-repeat: no-repeat;
+}
+
+.statusIndicator_true {
+	background-image: url("/assets/images/check.png");
+}
+
+.statusIndicator_false {
+	background-image: url("/assets/images/cross.png");
+}
+
+.statusIndicator_ {
+	background-image: url("/assets/images/empty.png");
+}
