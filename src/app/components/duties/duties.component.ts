@@ -11,29 +11,40 @@ import { DutyStatus } from "../../domain/dutyStatus";
 })
 export class DutiesComponent implements OnInit {
 
+    dutyTypes = [];
     dutiesTableData = null;
     dutiesFromDatabase = null;
     dates = [];
 
-    constructor(public authService: AuthService, private dutyService: DutyService) {
-      var userName = authService.getUserName();
-      if (!userName) {
-          userName = 'Filip';
-      } 
-      this.loadDuties(userName);
+    constructor(private authService: AuthService, private dutyService: DutyService) {
+        this.loadDutyTypes();
     }
 
     ngOnInit() {
     }
 
+    private loadDutyTypes() {
+        var userName = this.authService.getUserName();
+        if (!userName) {
+             userName = 'Filip';
+        } 
+
+        this.dutyService.getDutyTypes().subscribe(
+            dutyTypes => {
+                this.dutyTypes = dutyTypes;
+                this.loadDuties(userName);
+            }
+        );
+    }
+
     private loadDuties(userName: string): void {
-      this.dutyService.getDuties(userName).subscribe(
-        duties => {
-            this.dutiesFromDatabase = duties;
-            this.calculateDatesRange();
-            this.transformDutiesTableData();
-        }
-      );
+        this.dutyService.getDuties(userName).subscribe(
+            duties => {
+                this.dutiesFromDatabase = duties;
+                this.calculateDatesRange();
+                this.transformDutiesTableData();
+            }
+        );
     }
 
     private calculateDatesRange() {
@@ -88,34 +99,31 @@ export class DutiesComponent implements OnInit {
     }    
 
     public changeStatus(dutyStatus) {
-        console.log("Changing status for " + dutyStatus.dutyType + " on " + dutyStatus.date + " from " + dutyStatus.status);
         var rawDuty = this.dutiesFromDatabase.find((x) => x.date === dutyStatus.date && x.dutyType == dutyStatus.dutyType);
 
         if (!rawDuty) {
-                this.dutiesFromDatabase.push({
+            var newDutyStatus = {
                 date: dutyStatus.date,
                 dutyType: dutyStatus.dutyType,
                 user: "Filip",
                 status: true
-            });
+            };
+            this.dutiesFromDatabase.push(newDutyStatus);
+            this.dutyService.setStatus(newDutyStatus);
         } else {
             if (dutyStatus.status == undefined) {
-             rawDuty.status = true;
+                dutyStatus.status = true;
+                this.dutyService.setStatus(dutyStatus);
             } else if (dutyStatus.status == true) {
-               rawDuty.status = false;
+                dutyStatus.status = false;
+                this.dutyService.setStatus(dutyStatus);
             } else {
-               rawDuty.status = undefined;
+                dutyStatus.status = undefined;
             }
+            rawDuty.status = dutyStatus.status;
         }
         this.transformDutiesTableData();
     }
-
-    public dutyTypes = [ 
-        "Obowiązki podstawowe",
-        "Coś dla domu",
-        "Przygotowanie do szkoły",
-        "Porządek w pokoju",
-        "W łóżku przed 21:30"];
 
     dateToString(date) {
         var dd = date.getDate();

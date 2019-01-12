@@ -13,12 +13,23 @@ import {environment} from '../../../environments/environment';
 })
 export class DutyService {
 
-    private apiUrl = environment.apiUrl + "/duties";
+    private apiUrl = environment.apiUrl ;
 
     constructor(private http: HttpClient) { }
 
+    getDutyTypes():Observable<string[]> {
+ 		const url = `${this.apiUrl}/dutytypes`;
+        return this.http.get<string[]>(url);
+    }
+
     getDuties(user: string): Observable<DutyStatus[]> {
-        const url = `${this.apiUrl}?user=${user}`
+        const url = `${this.apiUrl}/duties?user=${user}`;
         return this.http.get<DutyStatus[]>(url);
+    }
+
+    setStatus(dutyStatus) {
+    	const url = `${this.apiUrl}/duties`;
+    	this.http.post<DutyStatus>(url, dutyStatus)
+			.subscribe(x => console.log("Result: " + x));    	
     }
 }
