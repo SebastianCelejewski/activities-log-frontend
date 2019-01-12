@@ -10,7 +10,7 @@
             <th>Date</th>
             <th *ngFor="let dutyType of dutyTypes">{{dutyType}}</th>
         </tr>
-        <tr *ngFor="let dutyInfo of getDuties()">
+        <tr *ngFor="let dutyInfo of dutiesTableData">
             <td>{{dutyInfo.date}}</td>
             <td *ngFor="let dutyStatus of dutyInfo.dutyStatuses">
                 <div (click)="changeStatus(dutyStatus)" class="statusIndicator statusIndicator_{{dutyStatus.status}}"></div>

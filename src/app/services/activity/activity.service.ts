@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 })
 export class ActivityService {
 
-    private apiUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl + "/activities";
 
     private activitiesAddedSubject = new Subject<Activity>();
 
