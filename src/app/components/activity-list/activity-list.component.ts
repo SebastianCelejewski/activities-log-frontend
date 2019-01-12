@@ -56,8 +56,6 @@ export class ActivityListComponent implements OnInit {
         return t1 > t2 ? 1 : -1;
     }
 
-/*        activities = activities.sort((a1,a2) => a1.type > a2.type ? 1 : -1); */
-
     deleteActivity(activity: Activity) {
         this.activities = this.activities.filter(a => a !== activity);
         this.activityService.deleteActivity(activity);

@@ -8,23 +8,24 @@ import { AuthService } from '../../services/auth/auth.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
     message: string = "";
  	userName: string = "";
  	userPassword: string = "";
 
     constructor(public authService: AuthService, public router: Router) {
-    	this.setMessage();
+    	this.updateLoginInfoMessage();
     }
 
     ngOnInit() {
-    	this.setMessage();
+    	this.updateLoginInfoMessage();
     }
 
     ngAfterViewInit() {
-    	this.setMessage();
+    	this.updateLoginInfoMessage();
     }
 
-    setMessage() {
+    updateLoginInfoMessage() {
     	if (this.authService.isLoggedIn()) {
     		this.message = 'Logged in as ' + this.authService.getUserName();
     	} else {
@@ -39,11 +40,7 @@ export class LoginComponent implements OnInit {
  
         this.authService.login(userName, userPassword).subscribe(() => {
             if (this.authService.isLoggedIn()) {
-                // Get the redirect URL from our auth service
-                // If no redirect has been set, use the default
                 let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/activities';
- 
-                // Redirect the user
                 this.router.navigate([redirect]);
             } else {
             	this.message = "Login error: " + this.authService.getLoginError();
