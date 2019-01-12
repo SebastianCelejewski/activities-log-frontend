@@ -4,26 +4,25 @@ import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 import { AuthenticationDetails } from 'amazon-cognito-identity-js';
-import {environment} from '../environments/environment';
+
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
 
+    public redirectUrl: string;
+
     private loggedIn = false;
     private userName: string = "";
-    private instanceId: number;
     private loginError: string = "";
-
-    private poolData = {
-        UserPoolId: environment.cognitoUserPool,
-        ClientId: environment.cognitoClientId
-    }
-
     private cognitoUser: CognitoUser;
 
-    redirectUrl: string;
+    private awsCognitoUserPool = new CognitoUserPool({
+        UserPoolId: environment.cognitoUserPool,
+        ClientId: environment.cognitoClientId
+    });
 
     public isLoggedIn(): boolean {
         return this.loggedIn;
@@ -38,29 +37,22 @@ export class AuthService {
     }
 
     login(userName: string, userPassword: string): Observable<boolean> {
-        var authenticationData = {
+        var authenticationDetails = new AuthenticationDetails({
             Username : userName,
             Password : userPassword
-        };
+        });
 
-        var authenticationDetails = new AuthenticationDetails(authenticationData);
-
-        var userPool = new CognitoUserPool(this.poolData);
-    
-        var userData = {
+        this.cognitoUser = new CognitoUser({
             Username : userName,
-            Pool : userPool
-        };
+            Pool : this.awsCognitoUserPool
+        });
 
-        this.cognitoUser = new CognitoUser(userData);
         const ref = this;
 
         return new Observable((observer) => {
             ref.cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function (result) {
                     console.log("Successfully authenticated using AWS Cognito");
-//                    var accessToken = result.getAccessToken().getJwtToken();
-//                    console.log("Access token: " + accessToken);
                     ref.loginError = "No error";
                     ref.loggedIn = true;
                     ref.userName = userName;
@@ -79,7 +71,6 @@ export class AuthService {
                 }
             });    
         });
-
     }
 
     logout(): void {

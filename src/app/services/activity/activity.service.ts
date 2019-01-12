@@ -4,9 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Guid } from "guid-typescript";
 import { Observable, of, Subject } from 'rxjs';
 
-import { Activity } from '../domain/activity';
+import { Activity } from '../../domain/activity';
 
-import {environment} from '../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

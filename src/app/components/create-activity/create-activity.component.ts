@@ -3,8 +3,8 @@ import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 
 import { Activity } from '../../domain/activity';
-import { ActivityService } from '../../services/activity.service';
-import { AuthService } from '../../services/auth.service';
+import { ActivityService } from '../../services/activity/activity.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
     selector: 'app-create-activity',
