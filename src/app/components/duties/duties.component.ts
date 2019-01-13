@@ -119,6 +119,7 @@ export class DutiesComponent implements OnInit {
                 this.dutyService.setStatus(dutyStatus);
             } else {
                 dutyStatus.status = undefined;
+                this.dutyService.deleteStatus(dutyStatus);
             }
             rawDuty.status = dutyStatus.status;
         }
