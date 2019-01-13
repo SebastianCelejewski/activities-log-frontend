@@ -29,12 +29,11 @@ export class DutyService {
 
     setStatus(dutyStatus) {
     	const url = `${this.apiUrl}/duties`;
-    	this.http.post<DutyStatus>(url, dutyStatus)
-			.subscribe(x => console.log("Post result: " + x));    	
+    	this.http.post<DutyStatus>(url, dutyStatus).subscribe();
     }
 
     deleteStatus(dutyStatus) {
     	const url = `${this.apiUrl}/duties?user=${dutyStatus.user}&date=${dutyStatus.date}&dutyType=${dutyStatus.dutyType}`;
-    	this.http.delete(url).subscribe(x => console.log("Delete result: " + x));
+    	this.http.delete(url).subscribe();
     }
 }

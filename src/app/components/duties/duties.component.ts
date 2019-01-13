@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { DutyService } from '../../services/duty/duty.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -9,36 +9,30 @@ import { DutyStatus } from "../../domain/dutyStatus";
     templateUrl: './duties.component.html',
     styleUrls: ['./duties.component.css']
 })
-export class DutiesComponent implements OnInit {
+export class DutiesComponent {
 
     dutyTypes = [];
     dutiesTableData = null;
     dutiesFromDatabase = null;
     dates = [];
+    userName = null;
 
     constructor(private authService: AuthService, private dutyService: DutyService) {
+        this.userName = this.authService.getUserName();
         this.loadDutyTypes();
     }
 
-    ngOnInit() {
-    }
-
     private loadDutyTypes() {
-        var userName = this.authService.getUserName();
-        if (!userName) {
-             userName = 'Filip';
-        } 
-
         this.dutyService.getDutyTypes().subscribe(
             dutyTypes => {
                 this.dutyTypes = dutyTypes;
-                this.loadDuties(userName);
+                this.loadDuties();
             }
         );
     }
 
-    private loadDuties(userName: string): void {
-        this.dutyService.getDuties(userName).subscribe(
+    private loadDuties(): void {
+        this.dutyService.getDuties(this.userName).subscribe(
             duties => {
                 this.dutiesFromDatabase = duties;
                 this.calculateDatesRange();
@@ -72,13 +66,14 @@ export class DutiesComponent implements OnInit {
 
     private transformDutiesTableData() {
         var data = [];
+
         this.dates.forEach(d => {
             var element = { date: d, dutyStatuses: []};
                 this.dutyTypes.forEach(dt => {
                     element.dutyStatuses.push({
                         date: d,
                         dutyType: dt,
-                        user: "Filip",
+                        user: this.userName,
                         status: undefined
                     });
                 }
@@ -105,7 +100,7 @@ export class DutiesComponent implements OnInit {
             var newDutyStatus = {
                 date: dutyStatus.date,
                 dutyType: dutyStatus.dutyType,
-                user: "Filip",
+                user: this.userName,
                 status: true
             };
             this.dutiesFromDatabase.push(newDutyStatus);
