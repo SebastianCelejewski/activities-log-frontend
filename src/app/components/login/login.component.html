@@ -4,7 +4,7 @@
 
 <div *ngIf="!authService.isLoggedIn()">
 	<p><label for="userName">User name </label><input #formUserName id="userName" [value]="userName"/></p>
-	<p><label for="userPassword">User password </label><input #formUserPassword id="userPassword" type="password" [value]="userPassword"/></p>
+	<p><label for="userPassword">User password </label><input #formUserPassword id="userPassword" type="password" [value]="userPassword" (keyup.enter)="login(formUserName.value, formUserPassword.value)"/></p>
 	<p><button (click)="login(formUserName.value, formUserPassword.value)">Login</button></p>
 </div>
 
