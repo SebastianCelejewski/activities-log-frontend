@@ -36,6 +36,27 @@ export class AuthService {
         return this.loginError;
     }
 
+    constructor() {
+        this.retrieveSession();
+    }
+
+    retrieveSession() {
+        var cognitoUser = this.awsCognitoUserPool.getCurrentUser();
+
+        if (cognitoUser != null) {
+            const ref = this;
+            cognitoUser.getSession(function(err, session) {
+                if (err) {
+                    threfis.loggedIn = false;
+                } else {
+                    ref.loggedIn = true;
+                    ref.userName = cognitoUser.getUsername();
+                    console.log("Retrieved session for user " + ref.userName);
+                }
+            });
+        }
+    }
+
     login(userName: string, userPassword: string): Observable<boolean> {
         var authenticationDetails = new AuthenticationDetails({
             Username : userName,
