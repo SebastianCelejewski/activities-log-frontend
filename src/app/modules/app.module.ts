@@ -15,6 +15,7 @@ import { MainPageComponent } from '../components/main-page/main-page.component';
 import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
 import { LoginComponent } from '../components/login/login.component';
 import { DutiesComponent } from '../components/duties/duties.component';
+import { ChangePasswordComponent } from '../components/change-password/change-password.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { DutiesComponent } from '../components/duties/duties.component';
         MainPageComponent,
         PageNotFoundComponent,
         LoginComponent,
-        DutiesComponent
+        DutiesComponent,
+        ChangePasswordComponent
     ],
     imports: [
         BrowserModule,

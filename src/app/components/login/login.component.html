@@ -11,3 +11,5 @@
 <div *ngIf="authService.isLoggedIn()">
     <p><button (click)="logout()">Logout</button></p>
 </div>
+
+<a *ngIf="authService.isLoggedIn()" routerLink="/changepassword" routerLinkActive="active">Change password</a>

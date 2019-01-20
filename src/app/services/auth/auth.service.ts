@@ -47,8 +47,10 @@ export class AuthService {
             const ref = this;
             cognitoUser.getSession(function(err, session) {
                 if (err) {
-                    threfis.loggedIn = false;
+                    ref.loggedIn = false;
+                    ref.userName = undefined;
                 } else {
+                    ref.cognitoUser = cognitoUser;
                     ref.loggedIn = true;
                     ref.userName = cognitoUser.getUsername();
                     console.log("Retrieved session for user " + ref.userName);
@@ -100,5 +102,18 @@ export class AuthService {
         }
         this.loggedIn = false;
         this.userName = undefined;
+    }
+
+    changePassword(currentPassword: string, newPassword: string): Observable<string> {
+        const ref = this;
+        return new Observable((observer) => {
+            ref.cognitoUser.changePassword(currentPassword, newPassword, function(err, result) {
+                if (err) {
+                    observer.next("Failed to change password: " + err.message);
+                } else {
+                    observer.next("Password changed successfully");
+                }
+            })
+        });
     }
 }
