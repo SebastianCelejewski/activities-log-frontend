@@ -1,6 +1,8 @@
+import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { MainPageComponent } from './main-page.component';
+
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -8,9 +10,11 @@ describe('MainPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainPageComponent ]
+      declarations: [MainPageComponent],
+      providers: [{ provide: AuthService, useValue: jasmine.createSpy('AuthService') }],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
