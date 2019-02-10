@@ -8,6 +8,12 @@ import { Activity } from '../../domain/activity';
 
 import {environment} from '../../../environments/environment';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Authorization': 'jDJjerhkwerKJER'
+  })
+};
+
 @Injectable({
     providedIn: 'root'
 })
@@ -22,18 +28,18 @@ export class ActivityService {
     constructor(private http: HttpClient) { }
 
     getActivities(user: string): Observable<Activity[]> {
-        const url = `${this.apiUrl}?user=${user}`
-        return this.http.get<Activity[]>(url);
+        const url = `${this.apiUrl}?user=${user}`;
+        return this.http.get<Activity[]>(url, httpOptions);
     }
 
     createActivity(activity: Activity): void {
         activity.id = Guid.create().toString();
-  	    this.http.post<Activity>(this.apiUrl, activity).subscribe(x => this.activitiesAddedSubject.next(activity));
+  	    this.http.post<Activity>(this.apiUrl, activity, httpOptions).subscribe(x => this.activitiesAddedSubject.next(activity));
     }
 
     deleteActivity(activity: Activity): void {
         const id = activity.id;
         const url = `${this.apiUrl}/${id}`;
-  	    this.http.delete<Activity>(url).subscribe();
+  	    this.http.delete<Activity>(url, httpOptions).subscribe();
     }
 }
