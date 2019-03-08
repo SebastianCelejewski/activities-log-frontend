@@ -6,7 +6,7 @@ import { Observable, of, Subject } from 'rxjs';
 
 import { Activity } from '../../domain/activity';
 
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 import { AuthService } from '../auth/auth.service';
 
@@ -47,7 +47,7 @@ export class ActivityService {
         var httpOptions = {
             headers: new HttpHeaders({
                 'Authorization': authId,
-                'x-api-key': 'H7BoXkJAbC2dbEVfagjDZ64ub1XSyEnA2kH0b2iE'
+                'x-api-key': environment.apiKey
             })
         };
 

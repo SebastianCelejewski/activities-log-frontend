@@ -6,7 +6,7 @@ import { Observable, of, Subject } from 'rxjs';
 
 import { DutyStatus } from '../../domain/dutyStatus';
 
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 import { AuthService } from '../auth/auth.service';
 
@@ -46,7 +46,8 @@ export class DutyService {
 
         var httpOptions = {
             headers: new HttpHeaders({
-                'Authorization': authId
+                'Authorization': authId,
+                'x-api-key': environment.apiKey
             })
         };
 
