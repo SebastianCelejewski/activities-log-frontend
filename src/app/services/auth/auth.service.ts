@@ -36,6 +36,10 @@ export class AuthService {
         return this.loginError;
     }
 
+    public getAuthId(): string {
+        return this.cognitoUser["signInUserSession"].idToken.jwtToken;
+    }
+
     constructor() {
         this.retrieveSession();
     }

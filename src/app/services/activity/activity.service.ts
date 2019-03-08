@@ -8,11 +8,7 @@ import { Activity } from '../../domain/activity';
 
 import {environment} from '../../../environments/environment';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Authorization': 'jDJjerhkwerKJER'
-  })
-};
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -25,21 +21,36 @@ export class ActivityService {
 
     activitiesAdded$ = this.activitiesAddedSubject.asObservable();
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private authService: AuthService) { }
 
     getActivities(user: string): Observable<Activity[]> {
         const url = `${this.apiUrl}?user=${user}`;
-        return this.http.get<Activity[]>(url, httpOptions);
+        return this.http.get<Activity[]>(url, this.getHttpOptions());
     }
 
     createActivity(activity: Activity): void {
         activity.id = Guid.create().toString();
-  	    this.http.post<Activity>(this.apiUrl, activity, httpOptions).subscribe(x => this.activitiesAddedSubject.next(activity));
+  	    this.http.post<Activity>(this.apiUrl, activity, this.getHttpOptions())
+            .subscribe(x => this.activitiesAddedSubject.next(activity));
     }
 
     deleteActivity(activity: Activity): void {
         const id = activity.id;
         const url = `${this.apiUrl}/${id}`;
-  	    this.http.delete<Activity>(url, httpOptions).subscribe();
+  	    this.http.delete<Activity>(url, this.getHttpOptions())
+            .subscribe();
+    }
+
+    getHttpOptions() {
+        var authId = this.authService.getAuthId();
+
+        var httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': authId,
+                'x-api-key': 'H7BoXkJAbC2dbEVfagjDZ64ub1XSyEnA2kH0b2iE'
+            })
+        };
+
+        return httpOptions;
     }
 }
